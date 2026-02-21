@@ -2,19 +2,22 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { authService } from '@/services/authService';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
   const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
-    // Redirigir basado en autenticación
-    if (authService.isAuthenticated()) {
-      router.push('/dashboard');
-    } else {
-      router.push('/auth');
+    // Solo redirigir cuando el contexto haya terminado de cargar
+    if (!isLoading) {
+      if (isAuthenticated) {
+        router.push('/dashboard');
+      } else {
+        router.push('/auth');
+      }
     }
-  }, [router]);
+  }, [isAuthenticated, isLoading, router]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">

@@ -1,8 +1,3 @@
-/**
- * Componente ProtectedRoute
- * Protege rutas que requieren autenticación
- */
-
 'use client';
 
 import { useAuth } from '@/context/AuthContext';
@@ -19,7 +14,6 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      // Redirigir al login si no está autenticado
       router.push('/auth');
     }
   }, [isAuthenticated, isLoading, router]);
@@ -36,7 +30,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (!isAuthenticated) {
-    return null; // La redirección ocurrirá automáticamente
+    return null;
   }
 
   return <>{children}</>;

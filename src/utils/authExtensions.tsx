@@ -93,7 +93,7 @@ export function saveLastPage(pathname: string): void {
  * Obtiene la última página visitada
  */
 export function getLastPage(): string {
-  return localStorage.getItem('lastPage') || '/dashboard';
+  return localStorage.getItem('lastPage') || '/';
 }
 
 /**

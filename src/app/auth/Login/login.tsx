@@ -50,7 +50,7 @@ const Login = () => {
     setLoading(true);
     try {
       await authService.login(formData);
-      // Redirigir al dashboard tras login exitoso
+      // Redirigir directamente a dashboard después del login
       router.push('/dashboard');
     } catch (err) {
       const error = err as AuthError;

@@ -31,6 +31,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     loadUser();
+
+    // Escuchar cambios en localStorage para sincronizar autenticación
+    const handleStorageChange = () => {
+      const storedUser = authService.getUser();
+      setUser(storedUser);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const logout = () => {
